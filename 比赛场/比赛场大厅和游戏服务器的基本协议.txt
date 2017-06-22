@@ -1,0 +1,72 @@
+大厅端口：30000
+客户端到大厅基本协议
+
+大厅和游戏服务器之间的协议
+
+1.LOBBY_SEND_ROOM_CREATE = 5000,//大厅发送到游戏服务器的创建房间信息
+port:int //要创建房间的游戏服务器端口号
+create_uid:int //个人赛事为uid ，官方赛事为0 
+room_number:string //房间号
+match_name:string		//比赛名称
+public:int			//是否公开 0 不公开 1公开
+match_type:int		//1积分赛 2积分淘汰赛 3单桌淘汰赛
+max_person:int		//最大人数
+min_person:int		//最少开赛人数
+start_time:int		开始时间
+room_type:int		//1  时间到开始  2	人慢开始
+pay_count:int		//开房花销
+prize:string		//比赛奖励说明
+
+2.LOBBY_SEND_ROOM_DISMISS = 5001,//大厅发送到游戏服务器的解散房间信息
+port:int //要解散的房间的游戏服务器端口号
+create_uid:int //创建者uid
+room_number:string //房间号
+
+3.LOBBY_TRANSFER_CREATE_ROOM_FAIL     = 5100, //游戏服务器返回创建房间失败
+
+room_number：string//房间号
+create_uid：int//创建者uid
+port：int //游戏服务器端口号
+
+ret:int//失败错误码，失败原因
+
+4.LOBBY_TRANSFER_CREATE_ROOM_SUCC		= 5101, //游戏服务器返回创建房间成功
+	
+room_number：string//房间号
+create_uid：int//创建者uid
+port：int //游戏服务器端口号
+
+
+5.LOBBY_TRANSFER_ROOM_DISS_FAIL		= 5102, //游戏服务器返回解散房间失败
+	
+room_number：string//房间号
+create_uid：int//创建者uid
+port：int //游戏服务器端口号
+
+ret:int//失败错误码，失败原因
+
+
+6.LOBBY_TRANSFER_ROOM_DISS_SUCC		= 5103, //游戏服务器返回解散房间成功
+	
+room_number：string//房间号
+create_uid：int//创建者uid
+port：int //游戏服务器端口号
+
+7.LOBBY_TRANSFER_ROOM_NOT_EXIST		= 5104, //游戏服务器返回房间不存在了
+	
+room_number：string//房间号
+create_uid：int//创建者uid
+port：int //游戏服务器端口号
+
+8.LOBBY_TRANSFER_ROOM_UPDATE			= 5105, //游戏服务器返回房间信息更新
+room_number：string//房间号
+create_uid：int//创建者uid
+port：int //游戏服务器端口号
+
+state:int //游戏房间状态
+current_player:int//当前房间玩家数目 
+
+
+
+
+

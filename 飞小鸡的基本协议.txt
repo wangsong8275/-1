@@ -1,0 +1,60 @@
+1.下行游戏开始（4016 SERVER_GAME_START_UC）
+｛
+	banker_user：int //庄家
+	current_user:int //当前玩家
+	card_data[]:int //手上的牌
+｝
+
+2.上行打牌请求（3001 CLIENT_GAME_ACTION_REQ）
+｛
+	action:int //enum client_action
+{ACTION_OUT_CARD = 1,//出牌
+ ACTION_OPERATE = 2,//操作
+};
+
+	
+	//1出牌
+	card_data:int //要出的牌
+
+	//2操作
+	operate_card:int //要操作的牌 
+	operate_code:int //操作动作 0x00(过，没有操作) 0x01（左吃类型）0x02（中吃类型）0x04（右吃类型）0x08（碰牌类型）0x10（杠牌类型）0x20（胡牌类型）0x80(面下杠)
+	
+}
+
+3.下行出牌广播（4019 CLIENT_GAME_ACTION_REQ）
+｛
+	seat_id：int//出牌座位
+	card_data:int//要出的牌
+｝
+
+4.下行发牌（4020 SERVER_GAME_SEND_CARD_UC）
+｛
+	current_user：int//座位id
+	card_data:int //发的牌
+	action_mask:int//动作掩码 0x00(过，没有操作) 0x01（左吃类型）0x02（中吃类型）0x04（右吃类型）0x08（碰牌类型）0x10（杠牌类型）0x20（胡牌类型）0x80(面下杠)
+｝
+
+5.下行操作广播(4021 SERVER_GAME_OPERATE_CARD_BC)
+{
+	operate_user:int//操作玩家
+	operate_card:int//操作牌
+	operate_code:int//操作类型
+	provide_user:int//提供牌的玩家
+	yaoji_num:int //使用了多少只幺鸡
+}
+
+6.下行通知玩家有操作(4022 SERVER_GAME_OPERATE_NOTIFY_UC)
+{
+	resume_user:int//本来的要轮到的下一个玩家
+	action_card:int//可以操作的牌
+	action_mask:int//动作掩码 0x00(过，没有操作) 0x01（左吃类型）0x02（中吃类型）0x04（右吃类型）0x08（碰牌类型）0x10（杠牌类型）0x20（胡牌类型）0x80(面下杠)
+}
+
+7.保留的补杠的牌(4023 SERVER_GAME_RESERVE_CARD_BC)
+{
+	card_data[]:int//补杠的牌
+}
+
+
+
