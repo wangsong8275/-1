@@ -29,5 +29,4 @@ private:
 	std::string _pass;
 };
 
-tesettest
 #endif 
